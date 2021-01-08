@@ -10,13 +10,9 @@ import java.util.logging.SimpleFormatter;
 public class Battlefield {
 
     private static Battlefield instance;
-    private List<Player> players;
-    private List<Weapon> freeWeapon;
     private Logger logger;
 
     private Battlefield(){
-        players = new ArrayList<Player>();
-        freeWeapon = new ArrayList<Weapon>();
         logger = Logger.getLogger("BattleLogger");
         FileHandler fh;
 
@@ -45,20 +41,42 @@ public class Battlefield {
         return instance;
     }
 
-    public List<Weapon> getFreeWeapon() {
-        return freeWeapon;
-    }
+    public void simulateBattle(){
+        Weapon w1 = new Weapon(WeaponType.SWORD);
+        Weapon w2 = new Weapon(WeaponType.SPEAR);
+        Weapon w3 = new Weapon(WeaponType.MAGIC);
+        Swordsman swordsman = new Swordsman();
+        try {
+            swordsman.getBag().addWeapon(w1);
+            swordsman.getBag().addWeapon(w2);
+            swordsman.changeWeapon();
 
-    public void setFreeWeapon(List<Weapon> freeWeapon) {
-        this.freeWeapon = freeWeapon;
-    }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Dragon dragon = new Dragon();
 
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(List<Player> players) {
-        this.players = players;
+        while(swordsman.getHealth() > 0 && dragon.getHealth() > 0){
+            try {
+                swordsman.changeWeapon();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                double attack = 100.0  * Math.random();
+                if(attack < 50){
+                    swordsman.attack(dragon, logger);
+                }else{
+                    dragon.attack(swordsman, logger);
+                }
+            }
+        }
+        if(swordsman.getHealth() > 0){
+            logger.info(swordsman.toString() + " je pobedio u duelu sa " + dragon.toString());
+        }
+        else{
+            logger.info(dragon.toString() + " je pobedio u duelu sa " + swordsman.toString());
+        }
     }
 
 

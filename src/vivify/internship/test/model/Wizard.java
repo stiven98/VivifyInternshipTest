@@ -1,5 +1,7 @@
 package vivify.internship.test.model;
 
+import java.util.logging.Logger;
+
 public class Wizard extends Hero {
     public Wizard() {
         super(100);
@@ -27,11 +29,14 @@ public class Wizard extends Hero {
     }
 
     @Override
-    public void attack(Monster m) {
+    public void attack(Monster m, Logger logger) {
         int monsterHealth = m.getHealth();
+        int damage = 0;
         if(this.getActiveWeapon() != null && this.getActiveWeapon().getType() == WeaponType.MAGIC){
             monsterHealth -= 20;
+            damage = 20;
         }
         m.setHealth(monsterHealth);
+        logger.info(this.toString() + " je napao " + m.toString() + " pomocu "+ getActiveWeapon().toString() + " steta: " + damage + " health");
     }
 }

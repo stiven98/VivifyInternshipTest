@@ -1,5 +1,7 @@
 package vivify.internship.test.model;
 
+import java.util.logging.Logger;
+
 public abstract class Hero extends Player{
     private WeaponBag bag;
     private Weapon activeWeapon;
@@ -69,6 +71,6 @@ public abstract class Hero extends Player{
         }
     }
 
-    public abstract void attack(Monster m);
+    public abstract void attack(Monster m, Logger logger);
 
 }

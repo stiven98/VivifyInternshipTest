@@ -1,5 +1,7 @@
 package vivify.internship.test.model;
 
+import java.util.logging.Logger;
+
 public class Swordsman extends Hero {
     public Swordsman() {
         super(150);
@@ -14,15 +16,21 @@ public class Swordsman extends Hero {
     }
 
     @Override
-    public void attack(Monster m) {
+    public void attack(Monster m, Logger logger) {
         int monsterHealth = m.getHealth();
+        int damage = 0;
         if(this.getActiveWeapon() != null){
-            if(this.getActiveWeapon().getType() == WeaponType.SWORD)
+            if(this.getActiveWeapon().getType() == WeaponType.SWORD){
                 monsterHealth -= 10;
-            if(this.getActiveWeapon().getType() == WeaponType.SPEAR)
+                damage = 10;
+            }
+            if(this.getActiveWeapon().getType() == WeaponType.SPEAR){
                 monsterHealth -= 15;
+                damage = 15;
+            }
         }
         m.setHealth(monsterHealth);
+        logger.info(this.toString() + " je napao " + m.toString() + " pomocu "+ getActiveWeapon().toString() + " steta: " + damage + " health");
     }
 
     @Override
