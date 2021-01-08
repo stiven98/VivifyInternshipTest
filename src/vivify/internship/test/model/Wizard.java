@@ -21,11 +21,11 @@ public class Wizard extends Hero {
     }
 
     @Override
-    public void pickupWeapon(Weapon weapon) throws Exception {
+    public void pickupWeapon(Weapon weapon, Logger logger) throws Exception {
         if(weapon.getType() != WeaponType.MAGIC){
             throw new Exception("Heroj ne moze pokupiti ovaj tip oruzja!");
         }
-        super.pickupWeapon(weapon);
+        super.pickupWeapon(weapon, logger);
     }
 
     @Override

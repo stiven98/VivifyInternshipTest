@@ -41,19 +41,50 @@ public class Battlefield {
         return instance;
     }
 
-    public void simulateBattle(){
+    public void simulateWeaponPickUp(){
         Weapon w1 = new Weapon(WeaponType.SWORD);
         Weapon w2 = new Weapon(WeaponType.SPEAR);
+        Weapon w22 = new Weapon(WeaponType.SPEAR);
+        Weapon w23 = new Weapon(WeaponType.SPEAR);
         Weapon w3 = new Weapon(WeaponType.MAGIC);
+
         Swordsman swordsman = new Swordsman();
+
         try {
-            swordsman.getBag().addWeapon(w1);
-            swordsman.getBag().addWeapon(w2);
-            swordsman.changeWeapon();
+            swordsman.pickupWeapon(w1, logger);
+            swordsman.pickupWeapon(w2, logger);
+            swordsman.pickupWeapon(w22, logger);
+            swordsman.pickupWeapon(w23, logger); //Expected exception bag is already full 1 active weapon and 2 weapons in the bag
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Weapon weaponToThrow = swordsman.getActiveWeapon();
+        Swordsman swordsman2 = new Swordsman();
+        Wizard wizard = new Wizard();
+
+        try {
+            swordsman.throwWeapon(weaponToThrow);
+            swordsman2.pickupWeapon(weaponToThrow, logger);
+            wizard.pickupWeapon(weaponToThrow, logger); // Expected exception not allowed type of weapon
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void simulateBattle(){
+        Weapon w1 = new Weapon(WeaponType.SWORD);
+        Weapon w2 = new Weapon(WeaponType.SPEAR);
+        Swordsman swordsman = new Swordsman();
+        try {
+            swordsman.pickupWeapon(w1, logger);
+            swordsman.pickupWeapon(w2, logger);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Dragon dragon = new Dragon();
 
         while(swordsman.getHealth() > 0 && dragon.getHealth() > 0){

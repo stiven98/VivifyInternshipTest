@@ -1,5 +1,7 @@
 package vivify.internship.test.model;
 
+import sun.rmi.runtime.Log;
+
 import java.util.logging.Logger;
 
 public abstract class Hero extends Player{
@@ -63,12 +65,13 @@ public abstract class Hero extends Player{
         changeWeapon();
     }
 
-    public void pickupWeapon(Weapon weapon) throws Exception {
-        bag.getWeaponList().add(weapon);
+    public void pickupWeapon(Weapon weapon, Logger logger) throws Exception {
+        bag.addWeapon(weapon);
         if(activeWeapon == null){
             activeWeapon = weapon;
             bag.getWeaponList().remove(weapon);
         }
+        logger.info(this.toString() + " je pokupio " + weapon.toString());
     }
 
     public abstract void attack(Monster m, Logger logger);
