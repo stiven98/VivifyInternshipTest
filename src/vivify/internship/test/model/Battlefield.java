@@ -48,7 +48,7 @@ public class Battlefield {
         Weapon w23 = new Weapon(WeaponType.SPEAR);
         Weapon w3 = new Weapon(WeaponType.MAGIC);
 
-        Swordsman swordsman = new Swordsman();
+        Hero swordsman = new Swordsman();
 
         try {
             swordsman.pickupWeapon(w1, logger);
@@ -60,8 +60,8 @@ public class Battlefield {
             e.printStackTrace();
         }
         Weapon weaponToThrow = swordsman.getActiveWeapon();
-        Swordsman swordsman2 = new Swordsman();
-        Wizard wizard = new Wizard();
+        Hero swordsman2 = new Swordsman();
+        Hero wizard = new Wizard();
 
         try {
             swordsman.throwWeapon(weaponToThrow);
@@ -76,7 +76,7 @@ public class Battlefield {
     public void simulateBattle(){
         Weapon w1 = new Weapon(WeaponType.SWORD);
         Weapon w2 = new Weapon(WeaponType.SPEAR);
-        Swordsman swordsman = new Swordsman();
+        Hero swordsman = new Swordsman();
         try {
             swordsman.pickupWeapon(w1, logger);
             swordsman.pickupWeapon(w2, logger);
@@ -85,7 +85,7 @@ public class Battlefield {
             e.printStackTrace();
         }
 
-        Dragon dragon = new Dragon();
+        Monster dragon = new Dragon();
 
         while(swordsman.getHealth() > 0 && dragon.getHealth() > 0){
             try {
